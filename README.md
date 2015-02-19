@@ -1,4 +1,4 @@
-![Ripley](https://github.com/samba2/ripley/blob/master/Ripley_kontur.jpg)
+<img src="https://github.com/samba2/ripley/blob/master/Ripley_kontur.jpg" alt="Ripley" height="300"> 
 
 Ripley is a prototype of a Programmable Logic Controller (PLC) Emulator.
 
