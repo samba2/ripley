@@ -1,0 +1,106 @@
+---
+    # 
+    # Complex emulation with almost any feature implemented.
+    # 
+    # Contains:
+    #   - Filling of the buffer (assemblyStep1)
+    #   - Taking data from previous event (assemblyStep2, assemblyStep3)
+    #   - status independent events (assemblyStep4, assemblyStep5)
+    #   - buffer reset (assemblyStep6)
+    #
+    connectionType: "active"
+    destinationHost: "127.0.0.1"
+    description: "Ripley Test Configuration"
+    # either send or receive port
+    port: 12001 
+    httpPort: 10119  
+    cycleTime: 15   
+    sessionTimeout: 5  # overwrite default session timeout of "30 sec"
+    # format see http://code.google.com/p/datejs/
+    dateFormat: yyyyMMdd
+    timeFormat: HHmmss
+    bufferKey: "${buffer_testKey}"
+    events:
+        assemblyStep1:
+            description: fill buffer
+            direction: "send" 
+            status: "A1"
+            stopSendingOnStatusMaxAmount: 3
+            actions:
+                sndRequestTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "REQUEST "                    ]
+                rcvNewData:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [ 1,     8, "ANSWER  "                   ]
+                        - [ 9,     8, "${buffer_testKey}"          ]
+                        - [17,     4, "${buffer_weight}"           ]
+                        - [21,     4, "${buffer_size}"             ]
+        assemblyStep2:
+            description: doing something with data in buffer
+            direction: "send" 
+            status: "A2"
+            previousStatus: "A1"
+            cycleTime: 16
+            actions:
+                sndRequestTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,    13, "ASSEMBLYSTEP2"              ]
+                        - [ 14,     8, "${buffer_testKey}"          ]
+                        - [ 22,     4, "${buffer_weight}"           ]
+        assemblyStep3:
+            description: finished production
+            direction: "send" 
+            status: "A3"
+            previousStatus: "A2"
+            maxEntriesOfStatusInBuffer: 2
+            cycleTime: 17
+            actions:
+                sndRequestTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,    13, "ASSEMBLYSTEP3"              ]
+                        - [ 14,     8, "${buffer_testKey}"          ]
+                        - [ 22,     4, "${buffer_weight}"           ]
+        assemblyStep4:
+            description: independend receive event with limited buffer status
+            direction: "receive"  
+            status: "B1"
+            maxEntriesOfStatusInBuffer: 2
+            actions:
+                rcvTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [   1,    8, "RCVTELEG"               ]
+                        - [   9,    8, "${buffer_testKey}"      ]
+                        - [  17,    4, "${buffer_weight}"       ]
+        assemblyStep5:
+            description: other step with no status
+            direction: "receive"  
+            actions:
+                rcvTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [   1,    8, "RCVTELE2"               ]
+                        - [   9,    8, "${buffer_testKey}"      ]
+                        - [  17,    4, "${buffer_weight}"       ]
+        assemblyStep6:
+            description: "reset buffer"
+            direction: "send"  
+            onlySendOnGuiTrigger: "true"
+            removeBufferEntriesOfStatus: "A3"
+            actions:
+                resetTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [   1,   10, "RESETBUFFER"            ]

@@ -1,0 +1,38 @@
+---
+    # simple buffer event
+    connectionType: "active"
+    destinationHost: "127.0.0.1"
+    # either send or receive port
+    port: 12001   
+    cycleTime: 3   # overwrite default cycle time of "30 sec"
+    sessionTimeout: 30  # overwrite default session timeout of "30 sec"
+    # format see http://code.google.com/p/datejs/
+    dateFormat: yyyyMMdd
+    timeFormat: HHmmss
+    bufferKey: "${buffer_testKey}"
+    externalDatasource:
+        valueEcho: "/home/xubuntu/ripley/trunk/externalPrograms/valueEcho.sh"
+    events:
+        emu2pcsEvent:
+            description: test simple receive event
+            direction: "receive"   # or send and receive ?
+            actions:
+                receiveTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "PCS2EMU "                    ]
+                        - [  9,     8, "${buffer_testKey}"           ]
+                        - [ 17,     8, "RCVTEST "                    ]
+                        - [ 25,     4, "${buffer_weight}"            ]
+                        - [ 29,     4, "${buffer_size}"              ]
+                        - [ 33,     4, ""                            ]
+                        - [ 37,     4, "${buffer_length}"            ]            
+                sendReceipt:
+                    run:
+                        - [  "valueEcho", "weight:${buffer_testKey}"  ]
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # -----------------------------------------------------
+                        - [  1,     8, "EMU2PCS "                     ]
+                        - [  9,     8, "${external_valueEcho_weight}" ]

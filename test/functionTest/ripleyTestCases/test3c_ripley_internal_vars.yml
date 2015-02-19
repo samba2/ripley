@@ -1,0 +1,39 @@
+---
+    # simple test with ripley internal variables
+    connectionType: "active"
+    destinationHost: "127.0.0.1"
+    # either send or receive port
+    port: 12001   
+    cycleTime: 3   # overwrite default cycle time of "30 sec"
+    sessionTimeout: 30  # overwrite default session timeout of "30 sec"
+    # format see http://code.google.com/p/datejs/
+    dateFormat: yyyyMMdd
+    timeFormat: HHmmss
+    events:
+        emu2pcsEvent:
+            description: test ripley internal vars
+            direction: "receive"   # or send and receive ?
+            status: "A1"
+            actions:
+                receiveTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "PCS2EMU "               ]
+                        - [  9,     8, "${testKey}"             ]
+                        - [ 17,     8, "RCVTEST "               ]
+                        - [ 25,     4, "${weight}"              ]
+                        - [ 29,     4, "${size}"                ]
+                        - [ 33,     4, ""                       ]
+                        - [ 37,     4, "${length}"              ]
+                sendReceipt:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "EMU2PCS "              ]
+                        - [  9,     8, "RECEIVED"              ]
+                        - [ 17,     8, "${testKey}"            ]
+                        - [ 25,     4, "${weight}"             ]
+                        - [ 29,     8, "${ripley_date}"        ]
+                        - [ 37,     6, "${ripley_time}"        ]
+                        - [ 43,     4, "DONE"                  ]

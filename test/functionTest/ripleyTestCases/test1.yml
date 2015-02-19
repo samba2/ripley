@@ -1,0 +1,34 @@
+---
+    connectionType: "active"
+    destinationHost: "127.0.0.1"
+    # either send or receive port
+    port: 12001   
+    cycleTime: 3   
+    sessionTimeout: 2  # overwrite default session timeout of "30 sec"
+    # format see http://code.google.com/p/datejs/
+    dateFormat: yyyyMMdd
+    timeFormat: HHmmss
+    events:
+        pcs2emuEvent:
+            description: simple send event
+            direction: "send"   # or send and receive ?
+            actions:
+                sendPcsTeleg:
+                    telegram:
+                        # Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,   8,  "PCS2EMU "                     ]
+                        - [  9,   8,  "SNDTEST "                     ]
+                        - [ 17,   8,  "BUILD   "                     ] 
+                        - [ 25,   8,  "TESTST  "                     ]
+                recvReceipt:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,    8,  "EMU2PCS "                    ]
+                        - [  9,    8,  "RECEIVED"                    ]
+                sendReceipt:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,    8,  "RECVRESP"                    ]

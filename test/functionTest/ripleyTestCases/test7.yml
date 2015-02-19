@@ -1,0 +1,42 @@
+---
+    connectionType: "active"
+    destinationHost: "127.0.0.1"
+    # either send or receive port
+    port: 12001   
+    cycleTime: 2   # overwrite default cycle time of "30 sec"
+    sessionTimeout: 5  # overwrite default session timeout of "30 sec"
+    # format see http://code.google.com/p/datejs/
+    dateFormat: yyyyMMdd
+    timeFormat: HHmmss
+    bufferKey: "${buffer_testKey}"
+    events:
+        assemblyStep1:
+            description: step one of assembly line
+            direction: "send"   # send
+            status: "A1"
+            stopSendingOnStatusMaxAmount: 3
+            actions:
+                sndRequestTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "REQUEST "                    ]
+                rcvNewData:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "ANSWER  "                   ]
+                        - [  9,     8, "${buffer_testKey}"          ]
+                        - [ 17,     4, "${buffer_weight}"           ]
+                        - [ 21,     4, "${buffer_size}"             ]
+        bufferDeleteEvent:
+            description: delete buffer
+            direction: "receive"  
+            removeBufferEntriesOfStatus: "A1"
+            actions:
+                rcvTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [ 1,     8, "RCVDATA "                   ]
+                        - [ 9,     6, "DELETE"                     ]

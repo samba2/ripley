@@ -1,0 +1,4 @@
+---
+    # test 10c invalid hostname
+    connectionType: "passive"
+    destinationHost: "invalid.hostname."

@@ -1,0 +1,71 @@
+---
+    # simple test with receiving variables
+    connectionType: "active"
+    destinationHost: "127.0.0.1"
+    # either send or receive port
+    port: 12001   
+    cycleTime: 3   # overwrite default cycle time of "30 sec"
+    sessionTimeout: 30  # overwrite default session timeout of "30 sec"
+    # format see http://code.google.com/p/datejs/
+    dateFormat: yyyyMMdd
+    timeFormat: HHmmss
+    bufferKey: "${buffer_testKey}"
+    events:
+        emu2pcsEvent:
+            description: test simple receive event
+            direction: "receive"   # or send and receive ?
+            status: "A1"
+            actions:
+                receiveTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "PCS2EMU "                ]
+                        - [  9,     8, "${testKey}"              ]
+                        - [ 17,     8, "RCVTEST "                ]
+                        - [ 25,     4, "${weight}"               ]
+                        - [ 29,     4, "${size}"                 ]
+                        - [ 33,     4, ""                        ]
+                        - [ 37,     4, "${length}"               ]
+                sendReceipt:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "EMU2PCS "              ]
+                        - [  9,     8, "RECEIVED"              ]
+                        - [ 17,     8, "${testKey}"            ]
+                        - [ 25,     4, "${weight}"             ]
+                        - [ 29,     4, "${size}"               ]
+        mixedEmu2pcsEvent:
+            description: mixing buffer + direct answer vars
+            direction: "receive"   # or send and receive ?
+            status: "A2"
+            actions:
+                receiveTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "PCS2EMU "                  ]
+                        - [  9,     8, "${buffer_testKey}"         ]
+                        - [ 17,     8, "MIXTEST "                  ]
+                        - [ 25,     4, "${buffer_weight}"          ]
+                        - [ 29,     4, "${buffer_size}"            ]
+                        - [ 33,     4, ""                          ]
+                        - [ 37,     4, "${buffer_length}"          ]
+                        - [ 41,     8, "${sessionId}"              ]
+                        - [ 49,     4, "${telegVersion}"           ]
+                        - [ 53,     4, "DONE"                      ]
+                        
+                sendReceipt:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "EMU2PCS "              ]
+                        - [  9,     8, "RECEIVED"              ]
+                        - [ 17,     8, "${buffer_testKey}"     ]
+                        - [ 25,     4, "${buffer_weight}"      ]
+                        - [ 29,     4, "${buffer_size}"        ]
+                        - [ 33,     8, "${sessionId}"          ]
+                        - [ 41,     4, "${nonExistingVariable}"]
+                        - [ 45,     4, "${telegVersion}"       ]
+                        - [ 49,     4, "DONE"                  ]

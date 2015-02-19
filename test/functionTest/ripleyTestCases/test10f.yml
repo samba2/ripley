@@ -1,0 +1,7 @@
+---
+    # test 10e cylce time out of range
+    connectionType: "passive"
+    destinationHost: "plc"
+    port: 12001
+    cycleTime: 3600
+    bufferKey: "${varName"

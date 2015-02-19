@@ -1,0 +1,63 @@
+---
+    # test 10k
+    connectionType: active
+    destinationHost: "plc"
+    port: 12001
+    cycleTime: 3600
+    bufferKey: "${varName}"
+    dateFormat: yyyyMMdd
+    timeFormat: HHmmss
+    events:
+        firstEvent:
+            description: "first event"
+            direction: "send"
+            onlySendOnGuiTrigger: true
+            stopSendingOnStatusMaxAmount: 5
+            status: "myStatus"
+            previousStatus: "myStatuss"
+            actions:
+                sendPcsTelegFirstEvent:
+                    telegram:
+                        # Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,   8,  "PCS2EMU "                     ]
+                        - [  9,   8,  "SNDTEST "                     ]
+                        - [ 17,   8,  "BUILD   "                     ] 
+                        - [ 25,   8,  "TESTST  "                     ]
+                recvReceiptFirstEvent:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,    8,  "EMU2PCS "                    ]
+                        - [  9,    8,  "RECEIVED"                    ]
+        secondEvent:
+            description: "this is the second event"
+            direction: "receive" 
+            status: "differentStatus"
+            previousStatus: "differentPrevStatus"
+            actions:
+                sendPcsTelegSecondEvent:
+                    telegram:
+                        # Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,   8,  "PCS2EMU "                     ]
+                        - [  9,   8,  "SNDTEST "                     ]
+                        - [ 17,   8,  "BUILD   "                     ] 
+                        - [ 25,   8,  "TESTST  "                     ]
+                recvReceiptSecondEvent:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,    8,  "EMU2PCS "                    ]
+                        - [  9,    8,  "RECEIVED"                    ]
+        thirdEvent:
+            description: "this is the second event"
+            direction: "receive" 
+            actions:
+                firstAction:
+                secondAction:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,    8,  "EMU2PCS "                    ]
+                        - [  9,    8,  "RECEIVED"                    ]

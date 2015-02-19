@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+  <link href="./css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" type="text/css"/> 
+  <link href="./css/ripley_stylesheet.css" rel="stylesheet" type="text/css"/> 
+    
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="./lib/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="./lib/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="./lib/jquery-ui-1.8.17.custom.min.js"></script>
+
+  <script class="remove" type="text/javascript" src="./js/BufferTables.js"></script>
+  <script class="remove" type="text/javascript" src="./js/Log.js"></script>
+  <script class="remove" type="text/javascript" src="./js/Config.js"></script>
+  <script class="remove" type="text/javascript" src="./js/Overview.js"></script>
+  <script class="remove" type="text/javascript" src="./js/ActiveTab.js"></script>
+  <script class="remove" type="text/javascript" src="./js/MenuEvents.js"></script>
+  <script class="remove" type="text/javascript" src="./js/SocketReceiveEvents.js"></script>
+  <script class="remove" type="text/javascript" src="./js/GeneralRipleyData.js"></script>
+  <script class="remove" type="text/javascript" src="./js/DocumentReady.js"></script>
+
+  <!-- central JS file start, will be activated during make process
+  
+  <script type="text/javascript" src="./js/ripleyGui.js"></script>
+  
+  central JS file stop -->
+
+  <title>R I P L E Y  -  Emulation ...</title>
+</head>
+<body>
+  <div id="container">
+    <div id="top">
+
+      <div id="topLeft">
+        <div id="logo">
+          <img id="logoImg" src="./media/ripley_logo.jpg"></img>
+        </div>
+      </div>
+
+      <div id="topRight">
+        <div id="heading">
+          <span class="big">R I P L E Y</span>  -  A Modest PLC-Emulator
+        </div>
+  
+        <div id="subHeading">
+          Config: <span id="spanEmuDescription"></span>
+        </div>
+
+        <div id="divMenu">
+          <a href=# id="idOverview"><span id="spanOverview">Overview</span></a>
+          <a href=# id="idBufferContent"><span id="spanBufferContent">Buffer Content</span></a>
+          <a href=# id="idLog"><span id="spanLog">Log</span></a>
+          <a href=# id="idConfig"><span id="spanConfig">Config</span></a>
+
+          <div class="statusNotConnected" id="ripleyConnectStatusIcon">&nbsp;</div>
+          <div class="statusNotConnected" id="pcsConnectStatusIcon">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content"></div>
+
+    <div id="footer">
+Runnig <span id="spanConfigFileName"></span>, Ripley version <span id="spanRipleyVersion"></span>, 2011-2012 by Maik T&ouml;pfer
+    </div>
+
+  </div>
+</body>
+
+</html>

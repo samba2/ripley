@@ -1,0 +1,5 @@
+---
+    # test 10d port is not integer
+    connectionType: "passive"
+    destinationHost: "plc"
+    port: "abc"

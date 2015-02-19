@@ -1,0 +1,57 @@
+Allgemein
+---------
+ - eval is evil, eval aufrufe überarbeiten
+ - puffer prio kennzeichen, wenn auftrag mit prio-kennzeichen, dann den zuerst aus puffer nehmen
+ - emu starten, leer (leeres band) oder mit eigentlicher systemfuellung
+ - s7 iso on tcp kopplg
+ - previousStatus Kopplung der Events ist FIFO, evtl. zusätzlich noch LIFO
+ - x-fache geschwindigkeit zur beschleunigung der emulation einführen. 
+   dabei wird jeweilige cycleTime einfach durch den angegebenen Faktor geteilt
+ - debug output "info  - socket.io started" entfernen > socket io log funktion anpassen
+ - besserer YAML parser mit besseren fehlermeldungen
+ - buffer priorisierung:
+   - verschiedene buffer tables
+   - standard: table 1 (wie momentan) -> alle daten in tabelle 1
+   - table-routing datenstruktur:
+     - ${buffer_kennz}: "J" -> table 1
+     - ${buffer_kennz}: "N" -> table 2
+     - buffer order: table1, table2
+   - standard-maessig sind tabellen FIFO organisiert, 
+     evtl. neuer parameter "bufferTableOrder: table1 : FIFO
+                                              table2: LIFO
+    - mehrfache tabellen muessen auch in GUI angezeigt werden                                         
+ - regressionstest:
+   - idee: nach jeder aktion/ event? werden ein/ mehrere tests ausgeführt,
+     die entweder true oder false sein können. ripley zeigt während des laufs/ danach
+     das testergebnis an
+   - dafür muss auch eine abbruchbedingung definiert werden (nach x-durchläufen ende)
+   - tests sind programme/ skripte die "true" oder "false" als text zurückliefern
+   - definition der testskripte via globaler datenstruktur:
+     testAbkuerzung : testskript pfad
+     in der emu-konfig wird dann mit der testAbkuerzung gearbeitet  
+ - quelle fuer bufferKey per externem skript - start der emulation durch z.b.
+   einscannen eines bufferKeys simulieren     
+   
+   skript kann mehrere variablen befuellen, aber mindestens buffer key muss befuellt sein
+    - pro zeile key : value, beides wird auf whitespaces + sonderzeichen getrimmt
+    - wenn wert zu gross fuer variable wird auf variablen-max-groesse abgeschnitten
+    - syntax check muss erweitert werden
+   
+   
+   
+GUI
+---
+ - Statusumbuchung erst nach Empfang des letzten Event-Telegramms
+ - "Inbetriebnahme-Modus" - GUI telegrammeditor (mit einblenden des teleg. formats)
+   der kurz vor dem senden aufgerufen wird um das zu schickende telegramm zu manipulieren >
+   soll das manuelle durchtesten aller server-logik-verzweigungen ermöglichen
+ - GUI deaktivieren per Parameter
+ - GUI schützen per PW
+ - syntax higlighting in GUI fuer config
+ - telegram counter, counter in gui rausfuehren
+ - Größe des Logbuffers Variabel
+
+
+Bugs
+----
+ - description umlaute in HTML umlaute

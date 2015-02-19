@@ -1,0 +1,40 @@
+---
+    connectionType: "active"
+    destinationHost: "127.0.0.1"
+    # either send or receive port
+    port: 12001   
+    cycleTime: 2   
+    sessionTimeout: 5  # overwrite default session timeout of "30 sec"
+    # format see http://code.google.com/p/datejs/
+    dateFormat: yyyyMMdd
+    timeFormat: HHmmss
+    events:
+        assemblyStep1:
+            description: "default cycle time"
+            direction: "send"   # send
+            actions:
+                sndRequestTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "2SECONDS"                    ]
+        assemblyStep2:
+            description: "5 seconds cycle time"
+            direction: "send"   # send
+            cycleTime: 5   
+            actions:
+                sndRequestTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "5SECONDS"                    ]
+        assemblyStep3:
+            description: "7 seconds cycle time"
+            direction: "send"   # send
+            cycleTime: 7   
+            actions:
+                sndRequestTeleg:
+                    telegram:
+                        #  Offset|Lng|  Value    |      Comment   
+                        # ------------------------------------------------
+                        - [  1,     8, "7SECONDS"                    ]

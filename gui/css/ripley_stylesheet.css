@@ -1,0 +1,122 @@
+  body { margin: 0px 0px 0px 0px; }
+
+  #container { font-family: 'Courier New', 'Courier', 'monospace';}
+
+  #top {background: #8f8f8f;}
+
+  #topLeft { display: inline-block;
+             /* IE7 hack for inline block */
+             zoom:1;
+             *display:inline;
+             padding-left: 30px;
+             padding-top: 5px;
+             padding-right: 25px;
+            padding-bottom: 5px;
+           }
+
+  #topRight { display: inline-block;
+              /* IE7 hack for inline block */
+              zoom:1;
+             *display:inline
+             }
+
+  #logo { padding:10px}
+  
+  #logoImg { border:1px solid #000000; }
+
+  #heading { padding-top: 20px;}
+  
+  #subHeading { padding-top: 10px}
+
+  #divMenu { padding-top: 30px;
+             position: relative;
+           }
+
+  #divMenu a { text-decoration: none;
+            color: #cccccc;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            padding-left: 5px;
+            padding-right: 15px;
+            }
+
+  #divMenu a:hover { color: #cccccc;
+                  background-color: #757575; 
+             }
+
+  #content { text-align: left;
+             padding-left: 20px;
+             padding-right: 10px;
+             }
+             
+  #footer { font-size: 0.7em;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            text-align: center;  
+          }
+
+  .top-padding {padding-top: 20px;}
+
+  .big { font-size: 1.5em;
+         font-weight: bold;
+       }
+
+  .small { font-size: 0.8em; }
+
+  .normal { font-size: 1em; }
+
+  .active { color: #ffffff;
+            font-weight: bold;
+          }
+
+  .statusNotConnected { background: #B40404; }
+
+  .statusConnected { background: #298A08; }
+
+  #ripleyConnectStatusIcon { width: 8px;
+                             height: 8px;
+                             font-size: 1px;
+
+                             position: absolute;
+                             bottom: 5px;
+                             right: -15px;
+                           }
+
+  #pcsConnectStatusIcon { width: 8px;
+                          height: 8px;
+                          font-size: 1px;
+
+                          position: absolute;
+                          bottom: 5px;
+                          right: -35px;
+                         }
+
+  .overviewDiv { background: #cccccc;
+                 display: inline-block;
+                 vertical-align: top;
+                 
+                 /* IE7 hack for inline block */
+                 zoom:1;
+                 *display:inline;
+                
+                 padding-top: 10px;
+                 padding-bottom: 10px;
+                 padding-left: 10px;
+                 padding-right: 10px;
+                 margin: 20px 20px 0px 0px;
+               }
+               
+  .overviewEventName { font-weight: bold;
+                       padding-right: 0px;
+                     }
+                    
+  .overviewEventStatus { padding-left: 20px }
+    
+  .overviewImgTriggerEvent { padding-left: 5px }  
+
+  .overviewEventDesc { font-size: 0.8em;
+                       max-width: 400px;
+                     }
+  .mousePointer { cursor: pointer }
+
+

@@ -1,0 +1,4 @@
+---
+    # test 10b no valid ip address
+    connectionType: "passive"
+    destinationHost: "1278.0.0.1"
